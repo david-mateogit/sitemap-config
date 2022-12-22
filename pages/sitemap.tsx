@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 import fs from "fs";
-import sites from "./api/data.json";
+import sites from "./data.json";
 
 const SITEMAP_URL_LIMIT = 5;
 
