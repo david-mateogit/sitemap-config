@@ -1,11 +1,8 @@
 module.exports = {
-  async rewrites() {
-    return [
-      {
-        source: "/sitemap.xml",
-        destination: "/sitemap",
-      }
-    ]
-
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      require("./scripts/sitemap-generator");
+    }
+    return config;
   },
 };

@@ -1,8 +1,7 @@
-import { GetServerSideProps } from "next/types";
-import fs from "fs";
-import sites from "./data.json";
+const fs = require("fs");
+const sites = require("./data.json");
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+async function generateSitemap() {
   // Fetch URLs for sitemap from API
   const urls = sites.map((u) => u.url);
   const baseUrl = "https://sitemap-config.vercel.app";
@@ -47,14 +46,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   sitemaps.forEach((sitemap, i) => {
     fs.writeFileSync(`public/sitemap${i + 1}.xml`, sitemap);
   });
+  fs.writeFileSync("public/sitemap.xml", sitemapIndex);
+}
 
-  // Set header to xml
-  res.setHeader("Content-Type", "application/xml");
-  res.write(sitemapIndex);
-  res.end();
-  return {
-    props: {}
-  };
-};
-
-export default function Sitemap() {}
+generateSitemap();
