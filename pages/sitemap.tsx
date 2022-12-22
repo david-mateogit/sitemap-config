@@ -1,4 +1,5 @@
 import { GetServerSideProps } from "next/types";
+import fs from "fs";
 import sites from "./data.json";
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
@@ -41,6 +42,10 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
         })
         .join("")}
     </urlset>`;
+  });
+
+  sitemaps.forEach((sitemap, i) => {
+    fs.writeFileSync(`public/sitemap${i + 1}.xml`, sitemap);
   });
 
   // Set header to xml
