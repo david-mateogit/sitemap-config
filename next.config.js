@@ -1,8 +1,8 @@
-module.exports = {
-  webpack: (config, { isServer }) => {
-    if (isServer) {
-      require("./scripts/sitemap-generator");
-    }
-    return config;
-  },
-};
+/**
+ * @type {import('next').NextConfig}
+ */
+const nextConfig = {
+  /* config options here */
+}
+
+module.exports = nextConfig
