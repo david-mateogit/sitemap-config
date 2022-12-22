@@ -3,11 +3,14 @@ const axios = require("axios");
 
 async function generateSitemap() {
   // Fetch URLs for sitemap from API
-  const urls = await axios
+  const data = await axios
     .get(
       "https://raw.githubusercontent.com/david-mateogit/temp-url-db/main/data.json"
     )
     .then((response) => response.data);
+
+  const urls = data.map(u => u.url);
+
   const baseUrl = "https://sitemap-config.vercel.app";
   // Split URLs into chunks of 50000
   const chunkSize = 10;
