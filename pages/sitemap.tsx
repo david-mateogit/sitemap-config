@@ -1,6 +1,7 @@
+import { GetServerSideProps } from "next/types";
 import sites from "./data.json";
 
-export async function getServerSideProps({ res }) {
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   // Fetch URLs for sitemap from API
   const urls = sites.map((u) => u.url);
   const baseUrl = "https://sitemap-config.vercel.app";
@@ -49,6 +50,6 @@ export async function getServerSideProps({ res }) {
   return {
     props: {}
   };
-}
+};
 
 export default function Sitemap() {}
