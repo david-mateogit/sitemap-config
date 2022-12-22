@@ -16,7 +16,8 @@
 /build
 
 /sitemap-*.xml
-sitemap-*.xml
+sitemap*.xml
+.xml
 # misc
 .DS_Store
 *.pem
