@@ -1,4 +1,4 @@
-import { GetServerSideProps, NextApiRequest, NextApiResponse } from "next";
+import { GetServerSideProps } from "next";
 import fs from "fs";
 import sites from "./api/data.json";
 
@@ -30,40 +30,6 @@ function generateSitemapIndexXML(sitemapUrls: string[]) {
   return xml;
 }
 
-// export async function getServerSideProps(
-//   req: NextApiRequest,
-//   res: NextApiResponse
-// ) {
-//   // Fetch the data for the sitemaps
-//   const data = sites;
-
-//   // Split the data into chunks for the individual sitemaps
-//   const dataChunks = [];
-//   for (let i = 0; i < data.length; i += SITEMAP_URL_LIMIT) {
-//     dataChunks.push(data.map((u) => u.url).slice(i, i + SITEMAP_URL_LIMIT));
-//   }
-
-//   // Generate the sitemap URLs
-//   const sitemapUrls = dataChunks.map((chunk, index) => {
-//     // Generate the sitemap XML
-//     const sitemapXml = generateSitemapXML(chunk);
-
-//     // Write the sitemap XML to a file
-//     fs.writeFileSync(`public/sitemap-${index}.xml`, sitemapXml);
-
-//     // Return the URL for the sitemap
-//     return `https://example.com/sitemap-${index}.xml`;
-//   });
-
-//   // Generate the sitemap index XML
-//   const sitemapIndexXml = generateSitemapIndexXML(sitemapUrls);
-
-//   res.setHeader("Content-Type", "text/xml");
-//   // we send the XML to the browser
-//   res.write(sitemapIndexXml);
-//   res.end();
-// }
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // Fetch the data for the sitemaps
   const data = sites;
@@ -83,7 +49,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     fs.writeFileSync(`public/sitemap-${index}.xml`, sitemapXml);
 
     // Return the URL for the sitemap
-    return `https://example.com/sitemap-${index}.xml`;
+    return `https://sitemap-config.vercel.app/sitemap-${index}.xml`;
   });
 
   // Generate the sitemap index XML
