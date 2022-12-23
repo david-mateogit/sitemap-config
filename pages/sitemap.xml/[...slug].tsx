@@ -45,6 +45,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const sitemap = sitemaps[index];
 
   context.res.setHeader("Content-Type", "application/xml");
+  context.res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59"
+  );
   context.res.write(sitemap);
   context.res.end();
 
